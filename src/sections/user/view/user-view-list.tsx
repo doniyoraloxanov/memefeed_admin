@@ -36,6 +36,7 @@ const TABLE_HEAD = [
   { id: 'role', label: 'Role' },
   { id: 'status', label: 'Status' },
   { id: 'source', label: 'Source' },
+  { id: 'joinedVia', label: 'Joined Via' },
 ];
 
 const defaultFilters: IUserTableFilters = {

@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function UserTableRow({ row, selected }: Props) {
-  const { firstName, lastName, username, status, role, source } = row;
+  const { firstName, lastName, username, status, role, source, joinedViaId } = row;
 
   return (
     <TableRow hover selected={selected}>
@@ -51,6 +51,7 @@ export default function UserTableRow({ row, selected }: Props) {
       </TableCell>
 
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{source}</TableCell>
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>{joinedViaId}</TableCell>
     </TableRow>
   );
 }
