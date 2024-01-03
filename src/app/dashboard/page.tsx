@@ -1,4 +1,4 @@
-import OneView from 'src/sections/one/view';
+import UserListView from 'src/sections/user/view/user-view-list';
 
 // ----------------------------------------------------------------------
 
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <OneView />;
+  return <UserListView />;
 }

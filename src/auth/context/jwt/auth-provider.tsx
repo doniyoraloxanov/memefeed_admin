@@ -4,8 +4,9 @@ import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
 import axios, { endpoints } from 'src/utils/axios';
 
+import { setSession } from './utils';
 import { AuthContext } from './auth-context';
-import { setSession, isValidToken } from './utils';
+// import { isValidToken } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
 
 // ----------------------------------------------------------------------
@@ -88,12 +89,13 @@ export function AuthProvider({ children }: Props) {
     try {
       const accessToken = sessionStorage.getItem(STORAGE_KEY);
 
-      if (accessToken && isValidToken(accessToken)) {
+      if (accessToken) {
         setSession(accessToken);
 
-        const res = await axios.get(endpoints.auth.me);
+        // const res = await axios.get(endpoints.auth.me);
 
-        const { user } = res.data;
+        // const { user } = res.data;
+        const user = {};
 
         dispatch({
           type: Types.INITIAL,
@@ -135,9 +137,9 @@ export function AuthProvider({ children }: Props) {
     };
 
     const res = await axios.post(endpoints.auth.login, data);
+    console.log('res', res);
 
     const { accessToken, user } = res.data;
-
     setSession(accessToken);
 
     dispatch({

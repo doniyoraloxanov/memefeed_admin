@@ -49,15 +49,15 @@ export function useNavData() {
       // OVERVIEW
       // ----------------------------------------------------------------------
       {
-        subheader: 'overview v5.7.0',
+        subheader: 'Toylist',
         items: [
           { title: 'one', path: paths.dashboard.root, icon: ICONS.dashboard },
-          { title: 'two', path: paths.dashboard.two, icon: ICONS.ecommerce },
-          {
-            title: 'three',
-            path: paths.dashboard.three,
-            icon: ICONS.analytics,
-          },
+          // { title: 'two', path: paths.dashboard.two, icon: ICONS.ecommerce },
+          // {
+          //   title: 'three',
+          //   path: paths.dashboard.three,
+          //   icon: ICONS.analytics,
+          // },
         ],
       },
 
@@ -71,9 +71,8 @@ export function useNavData() {
             path: paths.dashboard.group.root,
             icon: ICONS.user,
             children: [
-              { title: 'four', path: paths.dashboard.group.root },
-              { title: 'five', path: paths.dashboard.group.five },
-              { title: 'six', path: paths.dashboard.group.six },
+              { title: 'List', path: paths.dashboard.list },
+              { title: 'Inviation', path: paths.dashboard.invitation },
             ],
           },
         ],

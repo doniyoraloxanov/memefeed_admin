@@ -1,11 +1,11 @@
-import OneView from 'src/sections/one/view';
+import Inviation from 'src/sections/invitation/inviation';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Dashboard: One',
+  title: 'Dashboard: Two',
 };
 
 export default function Page() {
-  return <OneView />;
+  return <Inviation />;
 }

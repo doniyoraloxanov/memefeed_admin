@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String?
+  username  String? @unique
+
+  languageCode String?
+  status       UserStatus @default(ACTIVE)
+  role         Role       @default(USER)
+
+  referredUsers  User[]        @relation("ReferredUsers")
+  referredById   String?
+  referredBy     User?         @relation("ReferredUsers", fields: [referredById], references: [id])
+  referralStatus ReferalStatus @default(IDLE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  verificationStatus VerificationStatus @default(IDLE)
+  point              Point[]
+}
+
+enum ReferalStatus {
+  IDLE
+  ACTIVE
+}
+
+model Point {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Int      @default(0)
+  pointReason String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum VerificationStatus {
+  IDLE
+  PASSED
+  FAILED
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  BANNED
+  DELETED
+}
