@@ -1,6 +1,6 @@
 {
-  "name": "@minimal-kit/starter-next-ts",
-  "author": "Minimals",
+  "name": "toylistadmin",
+  "author": "ToyList",
   "version": "5.7.0",
   "description": "Next Starter & TypeScript",
   "private": true,
