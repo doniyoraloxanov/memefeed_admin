@@ -23,7 +23,7 @@ import TransitionsDialog from './transitions-dialog';
 export default function DialogView() {
   return (
     <>
-      <ComponentHero>
+      {/* <ComponentHero>
         <CustomBreadcrumbs
           heading="Dialog"
           links={[
@@ -35,7 +35,7 @@ export default function DialogView() {
           ]}
           moreLink={['https://mui.com/components/dialogs']}
         />
-      </ComponentHero>
+      </ComponentHero> */}
 
       <Container sx={{ my: 10 }}>
         <Masonry columns={{ xs: 1, md: 3 }} spacing={3}>

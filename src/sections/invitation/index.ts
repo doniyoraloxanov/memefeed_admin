@@ -1,1 +1,1 @@
-export { default as Inviation } from './inviation';
+export { default as Invitation } from './invitation';

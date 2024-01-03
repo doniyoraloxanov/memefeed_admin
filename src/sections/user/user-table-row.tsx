@@ -1,21 +1,21 @@
 import Avatar from '@mui/material/Avatar';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
 import ListItemText from '@mui/material/ListItemText';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 
 import Label from 'src/components/label';
 
-import { IUserItem } from 'src/types/user';
+import { Prisma, UserStatus } from '@prisma/client';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   selected: boolean;
-  row: IUserItem;
+  row: Prisma.UserGetPayload<{}>;
 };
 
 export default function UserTableRow({ row, selected }: Props) {
-  const { firstName, lastName, userName, status, role } = row;
+  const { firstName, lastName, username, status, role, source } = row;
 
   return (
     <TableRow hover selected={selected}>
@@ -33,24 +33,24 @@ export default function UserTableRow({ row, selected }: Props) {
       </TableCell>
 
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{lastName}</TableCell>
-
-      <TableCell sx={{ whiteSpace: 'nowrap' }}>{userName}</TableCell>
-
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>{username}</TableCell>
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{role}</TableCell>
 
       <TableCell>
         <Label
           variant="soft"
           color={
-            (status === 'active' && 'success') ||
-            (status === 'pending' && 'warning') ||
-            (status === 'banned' && 'error') ||
+            (status === UserStatus.ACTIVE && 'success') ||
+            (status === UserStatus.DELETED && 'warning') ||
+            (status === UserStatus.BANNED && 'error') ||
             'default'
           }
         >
           {status}
         </Label>
       </TableCell>
+
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>{source}</TableCell>
     </TableRow>
   );
 }

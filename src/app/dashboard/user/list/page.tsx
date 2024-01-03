@@ -5,12 +5,11 @@ import { prisma } from '../../../lib/prisma';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Dashboard: One',
+  title: 'Toylist | User overview',
 };
 
 export default async function Page() {
   const users = await prisma.user.findMany();
-  console.log('users', users);
 
   return <UserListView users={users} />;
 }

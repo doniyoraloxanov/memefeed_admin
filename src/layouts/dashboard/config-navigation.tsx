@@ -8,10 +8,6 @@ import SvgColor from 'src/components/svg-color';
 
 const icon = (name: string) => (
   <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
-  // OR
-  // <Iconify icon="fluent:mail-24-filled" />
-  // https://icon-sets.iconify.design/solar/
-  // https://www.streamlinehq.com/icons
 );
 
 const ICONS = {
@@ -46,23 +42,11 @@ const ICONS = {
 export function useNavData() {
   const data = useMemo(
     () => [
-      // OVERVIEW
-      // ----------------------------------------------------------------------
       {
         subheader: 'Toylist',
-        items: [
-          { title: 'one', path: paths.dashboard.root, icon: ICONS.dashboard },
-          // { title: 'two', path: paths.dashboard.two, icon: ICONS.ecommerce },
-          // {
-          //   title: 'three',
-          //   path: paths.dashboard.three,
-          //   icon: ICONS.analytics,
-          // },
-        ],
+        items: [{ title: 'Statistics', path: paths.dashboard.root, icon: ICONS.dashboard }],
       },
 
-      // MANAGEMENT
-      // ----------------------------------------------------------------------
       {
         subheader: 'management',
         items: [
@@ -72,7 +56,7 @@ export function useNavData() {
             icon: ICONS.user,
             children: [
               { title: 'List', path: paths.dashboard.list },
-              { title: 'Inviation', path: paths.dashboard.invitation },
+              { title: 'Invitation', path: paths.dashboard.invitation },
             ],
           },
         ],

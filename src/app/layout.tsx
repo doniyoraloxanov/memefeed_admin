@@ -11,8 +11,13 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 
 import { AuthProvider } from 'src/auth/context/jwt';
+import dynamic from 'next/dynamic';
 
 // ----------------------------------------------------------------------
+
+const SnackbarProvider = dynamic(() => import('src/components/snackbar/snackbar-provider'), {
+  ssr: false,
+});
 
 export const viewport = {
   themeColor: '#000000',
@@ -55,11 +60,13 @@ export default function RootLayout({ children }: Props) {
             }}
           >
             <ThemeProvider>
-              <MotionLazy>
-                <SettingsDrawer />
-                <ProgressBar />
-                {children}
-              </MotionLazy>
+              <SnackbarProvider>
+                <MotionLazy>
+                  <SettingsDrawer />
+                  <ProgressBar />
+                  {children}
+                </MotionLazy>
+              </SnackbarProvider>
             </ThemeProvider>
           </SettingsProvider>
         </AuthProvider>

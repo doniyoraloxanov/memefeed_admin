@@ -1,38 +1,41 @@
 'use client';
 
-import { useState } from 'react';
 import isEqual from 'lodash/isEqual';
+import { useState } from 'react';
 
 import Card from '@mui/material/Card';
+import Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import Container from '@mui/material/Container';
 import TableContainer from '@mui/material/TableContainer';
 
 import { paths } from 'src/routes/paths';
 
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 import Scrollbar from 'src/components/scrollbar';
 import { useSettingsContext } from 'src/components/settings';
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 import {
-  useTable,
-  emptyRows,
-  TableNoData,
-  getComparator,
   TableEmptyRows,
   TableHeadCustom,
+  TableNoData,
+  emptyRows,
+  getComparator,
+  useTable,
 } from 'src/components/table';
 
 // ----------------------------------------------------------------------
-import { IUserItem, IUserTableFilters } from 'src/types/user';
+import { IUserTableFilters } from 'src/types/user';
 
+import { User } from '@prisma/client';
 import UserTableRow from '../user-table-row';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'FirstName' },
-  { id: 'lastName', label: 'LastName', width: 180 },
-  { id: 'username', label: 'Username', width: 220 },
-  { id: 'status', label: 'Status', width: 100 },
+  { id: 'lastName', label: 'LastName' },
+  { id: 'username', label: 'Username' },
+  { id: 'role', label: 'Role' },
+  { id: 'status', label: 'Status' },
+  { id: 'source', label: 'Source' },
 ];
 
 const defaultFilters: IUserTableFilters = {
@@ -41,9 +44,7 @@ const defaultFilters: IUserTableFilters = {
   status: 'all',
 };
 
-// ----------------------------------------------------------------------
-
-export default function UserListView({ users }: { users: IUserItem[] }) {
+export default function UserListView({ users }: { users: User[] }) {
   const table = useTable();
 
   const settings = useSettingsContext();
@@ -125,7 +126,7 @@ function applyFilter({
   comparator,
   filters,
 }: {
-  inputData: IUserItem[];
+  inputData: User[];
   comparator: (a: any, b: any) => number;
   filters: IUserTableFilters;
 }) {

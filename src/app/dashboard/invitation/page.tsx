@@ -1,11 +1,22 @@
-import Inviation from 'src/sections/invitation/inviation';
+import { prisma } from 'src/app/lib/prisma';
+import Invitation from 'src/sections/invitation/invitation';
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Dashboard: Two',
+  title: 'Toylist | Invitation overview',
 };
 
-export default function Page() {
-  return <Inviation />;
+export default async function Page() {
+  const invitations = await prisma.invitation.findMany({
+    include: {
+      _count: {
+        select: {
+          usersJoined: true,
+        },
+      },
+    },
+  });
+
+  return <Invitation data={invitations} />;
 }
