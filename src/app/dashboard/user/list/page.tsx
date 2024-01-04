@@ -8,6 +8,8 @@ export const metadata = {
   title: 'Toylist | User overview',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const users = await prisma.user.findMany();
 
