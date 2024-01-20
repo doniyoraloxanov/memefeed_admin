@@ -5,9 +5,7 @@ import TableRow from '@mui/material/TableRow';
 
 import Label from 'src/components/label';
 
-import { Prisma, UserStatus } from '@prisma/client';
-
-// ----------------------------------------------------------------------
+import { Prisma } from '@prisma/client';
 
 type Props = {
   selected: boolean;
@@ -15,7 +13,18 @@ type Props = {
 };
 
 export default function UserTableRow({ row, selected }: Props) {
-  const { firstName, lastName, username, status, role, source, joinedViaId } = row;
+  const {
+    firstName,
+    lastName,
+    username,
+    status,
+    role,
+    languageCode,
+    level,
+    isVerified,
+    id,
+    createdAt,
+  } = row;
 
   return (
     <TableRow hover selected={selected}>
@@ -37,21 +46,13 @@ export default function UserTableRow({ row, selected }: Props) {
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{role}</TableCell>
 
       <TableCell>
-        <Label
-          variant="soft"
-          color={
-            (status === UserStatus.ACTIVE && 'success') ||
-            (status === UserStatus.DELETED && 'warning') ||
-            (status === UserStatus.BANNED && 'error') ||
-            'default'
-          }
-        >
+        <Label variant="soft" color={'default'}>
           {status}
         </Label>
       </TableCell>
 
-      <TableCell sx={{ whiteSpace: 'nowrap' }}>{source}</TableCell>
-      <TableCell sx={{ whiteSpace: 'nowrap' }}>{joinedViaId}</TableCell>
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>{languageCode}</TableCell>
+      <TableCell sx={{ whiteSpace: 'nowrap' }}>{level}</TableCell>
     </TableRow>
   );
 }

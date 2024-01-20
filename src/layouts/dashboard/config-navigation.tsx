@@ -43,7 +43,7 @@ export function useNavData() {
   const data = useMemo(
     () => [
       {
-        subheader: 'Toylist',
+        subheader: 'MemeProf',
         items: [{ title: 'Statistics', path: paths.dashboard.root, icon: ICONS.dashboard }],
       },
 
@@ -56,7 +56,16 @@ export function useNavData() {
             icon: ICONS.user,
             children: [
               { title: 'List', path: paths.dashboard.list },
-              { title: 'Invitation', path: paths.dashboard.invitation },
+              { title: 'Chat', path: paths.dashboard.chat },
+            ],
+          },
+          {
+            title: 'Memes',
+            path: paths.dashboard.group.root,
+            icon: ICONS.user,
+            children: [
+              { title: 'List', path: paths.dashboard.meme.root },
+              { title: 'Chat', path: paths.dashboard.chat },
             ],
           },
         ],

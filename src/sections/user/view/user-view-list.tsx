@@ -1,68 +1,63 @@
 'use client';
 
-import isEqual from 'lodash/isEqual';
-import { useState } from 'react';
-
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
 
 import { paths } from 'src/routes/paths';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
-import Scrollbar from 'src/components/scrollbar';
 import { useSettingsContext } from 'src/components/settings';
-import {
-  TableEmptyRows,
-  TableHeadCustom,
-  TableNoData,
-  emptyRows,
-  getComparator,
-  useTable,
-} from 'src/components/table';
 
-// ----------------------------------------------------------------------
-import { IUserTableFilters } from 'src/types/user';
-
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { User } from '@prisma/client';
-import UserTableRow from '../user-table-row';
+import { fDateTime } from 'src/utils/format-time';
+import { usePathname, useRouter } from 'next/navigation';
 
-const TABLE_HEAD = [
-  { id: 'name', label: 'FirstName' },
-  { id: 'lastName', label: 'LastName' },
-  { id: 'username', label: 'Username' },
-  { id: 'role', label: 'Role' },
-  { id: 'status', label: 'Status' },
-  { id: 'source', label: 'Source' },
-  { id: 'joinedVia', label: 'Joined Via' },
+const columns: GridColDef[] = [
+  {
+    field: 'id',
+    headerName: 'ID',
+    flex: 1,
+  },
+  {
+    field: 'firstName',
+    headerName: 'Name',
+    flex: 1,
+    valueGetter(params) {
+      const value = params.row.firstName;
+      return `${value} ${params.row.lastName}`;
+    },
+  },
+  {
+    field: 'role',
+    headerName: 'role',
+    flex: 1,
+  },
+  {
+    field: 'isVerified',
+    headerName: 'Verification Status',
+    flex: 1,
+  },
+  {
+    field: 'languageCode',
+    headerName: 'Language',
+    flex: 1,
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Joined',
+    flex: 1,
+    valueGetter(params) {
+      const value = params.row.createdAt;
+      return fDateTime(value);
+    },
+  },
 ];
 
-const defaultFilters: IUserTableFilters = {
-  name: '',
-  role: [],
-  status: 'all',
-};
-
-export default function UserListView({ users }: { users: User[] }) {
-  const table = useTable();
-
+export default function UserListView({ users, total }: { users: User[]; total: number }) {
   const settings = useSettingsContext();
-
-  const denseHeight = table.dense ? 56 : 56 + 20;
-
-  const [filters] = useState(defaultFilters);
-
-  const canReset = !isEqual(defaultFilters, filters);
-
-  const dataFiltered = applyFilter({
-    inputData: users ?? [],
-    comparator: getComparator(table.order, table.orderBy),
-    filters,
-  });
-
-  const notFound = (!dataFiltered?.length && canReset) || !dataFiltered.length;
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
@@ -79,83 +74,27 @@ export default function UserListView({ users }: { users: User[] }) {
       />
 
       <Card>
-        <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-          <Scrollbar>
-            <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
-              <TableHeadCustom
-                order={table.order}
-                orderBy={table.orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={dataFiltered.length}
-                numSelected={table.selected.length}
-                onSort={table.onSort}
-              />
-
-              <TableBody>
-                {dataFiltered
-                  .slice(
-                    table.page * table.rowsPerPage,
-                    table.page * table.rowsPerPage + table.rowsPerPage
-                  )
-                  .map((row) => (
-                    <UserTableRow
-                      key={row.id.toString()}
-                      row={row}
-                      selected={table.selected.includes(row.id.toString())}
-                    />
-                  ))}
-
-                <TableEmptyRows
-                  height={denseHeight}
-                  emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
-                />
-
-                <TableNoData notFound={notFound} />
-              </TableBody>
-            </Table>
-          </Scrollbar>
-        </TableContainer>
+        <DataGrid
+          rowCount={total}
+          rows={users}
+          columns={columns}
+          disableRowSelectionOnClick
+          onPaginationModelChange={(model) => {
+            console.log(model);
+            router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
+          }}
+          pagination
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+                page: 0,
+              },
+            },
+          }}
+          paginationMode="server"
+        />
       </Card>
     </Container>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function applyFilter({
-  inputData,
-  comparator,
-  filters,
-}: {
-  inputData: User[];
-  comparator: (a: any, b: any) => number;
-  filters: IUserTableFilters;
-}) {
-  const { name, status, role } = filters;
-
-  const stabilizedThis = inputData?.map((el, index) => [el, index] as const);
-
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el) => el[0]);
-
-  if (name) {
-    inputData = inputData.filter(
-      (user) => user.firstName.toLowerCase().indexOf(name.toLowerCase()) !== -1
-    );
-  }
-
-  if (status !== 'all') {
-    inputData = inputData.filter((user) => user.status === status);
-  }
-
-  if (role.length) {
-    inputData = inputData.filter((user) => role.includes(user.role));
-  }
-
-  return inputData;
 }

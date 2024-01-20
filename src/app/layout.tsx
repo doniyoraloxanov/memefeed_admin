@@ -6,12 +6,12 @@ import 'src/global.css';
 import ThemeProvider from 'src/theme';
 import { primaryFont } from 'src/theme/typography';
 
-import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
+import ProgressBar from 'src/components/progress-bar';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 
-import { AuthProvider } from 'src/auth/context/jwt';
 import dynamic from 'next/dynamic';
+import { AuthProvider } from 'src/auth/context/jwt';
 
 // ----------------------------------------------------------------------
 
@@ -27,16 +27,8 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Toylist',
-  description: 'Toylist Dashboard developed by',
-  keywords: 'react,material,kit,application,dashboard,admin,template',
-  manifest: '/manifest.json',
-  icons: [
-    { rel: 'icon', url: '/favicon/favicon.ico' },
-    { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon/favicon-16x16.png' },
-    { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon/favicon-32x32.png' },
-    { rel: 'apple-touch-icon', sizes: '180x180', url: '/favicon/apple-touch-icon.png' },
-  ],
+  title: 'MemeProf | Dashboard',
+  description: 'MemeProf Dashboard developed by',
 };
 
 type Props = {

@@ -18,13 +18,15 @@ export const paths = {
   dashboard: {
     root: ROOTS.DASHBOARD,
     list: `${ROOTS.DASHBOARD}/user/list`,
-    invitation: `${ROOTS.DASHBOARD}/invitation`,
-    new: `${ROOTS.DASHBOARD}/invitation/new`,
+    chat: `${ROOTS.DASHBOARD}/user/chat`,
     three: `${ROOTS.DASHBOARD}/three`,
     group: {
       root: `${ROOTS.DASHBOARD}/group`,
       five: `${ROOTS.DASHBOARD}/group/five`,
       six: `${ROOTS.DASHBOARD}/group/six`,
+    },
+    meme: {
+      root: `${ROOTS.DASHBOARD}/memes`,
     },
   },
 };

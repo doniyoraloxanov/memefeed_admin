@@ -1,6 +1,6 @@
 const admins = {
   password: 'admin',
-  email: 'admin@gmail.com',
+  email: 'contact@gmemeProf.com',
 };
 
 export async function POST(req: Request) {

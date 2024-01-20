@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 module.exports = {
   trailingSlash: true,
   modularizeImports: {
@@ -17,5 +18,12 @@ module.exports = {
       use: ['@svgr/webpack'],
     });
     return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'efqbixdttdrdsnemjtme.supabase.co',
+      },
+    ],
   },
 };

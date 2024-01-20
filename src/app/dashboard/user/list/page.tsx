@@ -5,13 +5,23 @@ import { prisma } from '../../../lib/prisma';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Toylist | User overview',
+  title: 'MemeProf | User overview',
 };
 
 export const dynamic = 'force-dynamic';
 
-export default async function Page() {
-  const users = await prisma.user.findMany();
+export default async function Page({ searchParams }: { searchParams: Record<string, string> }) {
+  const total = await prisma.user.count();
+  const users = await prisma.user.findMany({
+    include: {
+      _count: {
+        select: { referredUsers: true },
+      },
+    },
 
-  return <UserListView users={users} />;
+    take: searchParams.pageSize ? parseInt(searchParams.pageSize) : 10,
+    skip: searchParams.page ? parseInt(searchParams.page) * parseInt(searchParams.pageSize) : 0,
+  });
+
+  return <UserListView users={users} total={total} />;
 }
