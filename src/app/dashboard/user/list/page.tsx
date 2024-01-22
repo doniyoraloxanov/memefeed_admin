@@ -19,8 +19,8 @@ export default async function Page({ searchParams }: { searchParams: Record<stri
       },
     },
 
-    take: searchParams.pageSize ? parseInt(searchParams.pageSize) : 10,
-    skip: searchParams.page ? parseInt(searchParams.page) * parseInt(searchParams.pageSize) : 0,
+    take: searchParams.pageSize ? Number(searchParams.pageSize) : 10,
+    skip: searchParams.page ? Number(searchParams.page) * Number(searchParams.pageSize) : 0,
   });
 
   return <UserListView users={users} total={total} />;

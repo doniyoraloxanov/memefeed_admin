@@ -31,9 +31,13 @@ model User {
 
   point     Point[]
   memes     Meme[]
-  favorites Meme[]  @relation("Favorites")
+  favorites Meme[]    @relation("Favorites")
   likes     Like[]
-  level     Level   @default(NOOB)
+  comments  Comment[]
+  followers User[]    @relation("Followers")
+  following User[]    @relation("Followers")
+
+  level Level @default(NOOB)
 }
 
 model Point {
@@ -59,8 +63,9 @@ model Meme {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  favorites User[] @relation("Favorites")
+  favorites User[]    @relation("Favorites")
   likes     Like[]
+  comments  Comment[]
 
   level Level @default(NOOB)
 
@@ -72,11 +77,25 @@ model Like {
   id String @id @default(uuid())
 
   userId BigInt
-  user   User   @relation(fields: [userId], references: [id], onDelete: NoAction)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   memeId String
   meme   Meme   @relation(fields: [memeId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id String @id @default(uuid())
+
+  userId BigInt
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  memeId String
+  meme   Meme   @relation(fields: [memeId], references: [id], onDelete: Cascade)
+
+  text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

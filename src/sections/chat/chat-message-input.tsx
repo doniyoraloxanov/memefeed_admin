@@ -1,18 +1,17 @@
 import { sub } from 'date-fns';
-import { useRef, useMemo, useState, useCallback } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
-import Stack from '@mui/material/Stack';
-import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import Stack from '@mui/material/Stack';
 
-import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import uuidv4 from 'src/utils/uuidv4';
 
-import { sendMessage, createConversation } from 'src/app/api/chat';
+import { sendMessage } from 'src/app/api/chat';
 
 import Iconify from 'src/components/iconify';
 
@@ -112,6 +111,8 @@ export default function ChatMessageInput({
         console.error(error);
       }
     },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [conversationData, message, messageData, onAddRecipients, router, selectedConversationId]
   );
 

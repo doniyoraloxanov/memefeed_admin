@@ -1,13 +1,13 @@
 'use client';
 
-import { useMemo, useEffect, useReducer, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useReducer } from 'react';
 
 import axios, { endpoints } from 'src/utils/axios';
 
-import { setSession } from './utils';
 import { AuthContext } from './auth-context';
+import { setSession } from './utils';
 // import { isValidToken } from './utils';
-import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
+import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
 
 // ----------------------------------------------------------------------
 /**
@@ -137,7 +137,6 @@ export function AuthProvider({ children }: Props) {
     };
 
     const res = await axios.post(endpoints.auth.login, data);
-    console.log('res', res);
 
     const { accessToken, user } = res.data;
     setSession(accessToken);

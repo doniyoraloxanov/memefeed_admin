@@ -1,12 +1,11 @@
 const admins = {
   password: 'admin',
-  email: 'contact@gmemeProf.com',
+  email: 'contact@memeprof.com',
 };
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log('data', body);
 
     const { email, password }: { email: string; password: string } = body;
 

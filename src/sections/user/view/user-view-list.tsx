@@ -10,8 +10,8 @@ import { useSettingsContext } from 'src/components/settings';
 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { User } from '@prisma/client';
-import { fDateTime } from 'src/utils/format-time';
 import { usePathname, useRouter } from 'next/navigation';
+import { fDateTime } from 'src/utils/format-time';
 
 const columns: GridColDef[] = [
   {
@@ -80,7 +80,6 @@ export default function UserListView({ users, total }: { users: User[]; total: n
           columns={columns}
           disableRowSelectionOnClick
           onPaginationModelChange={(model) => {
-            console.log(model);
             router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
           }}
           pagination

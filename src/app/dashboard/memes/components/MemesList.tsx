@@ -1,6 +1,9 @@
-import { IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
+import { ImageList, IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
+
 import { prisma } from 'src/app/lib/prisma';
+
 import Iconify from 'src/components/iconify';
+
 import MemePagination from './MemePagination';
 
 type Props = {
@@ -8,10 +11,9 @@ type Props = {
 };
 
 const MemesList = async ({ page }: Props) => {
-  console.log(page);
   const memes = await prisma.meme.findMany({
-    skip: page * 3 - 3 ?? 0,
-    take: 3,
+    skip: page * 10 - 10 ?? 0,
+    take: 10,
     include: { createdBy: true },
   });
   const total = await prisma.meme.count();

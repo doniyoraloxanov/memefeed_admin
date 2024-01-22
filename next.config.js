@@ -22,7 +22,7 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        hostname: 'cyyslmrwxjypirywjmqt.supabase.co',
+        hostname: 'efqbixdttdrdsnemjtme.supabase.co',
       },
     ],
   },

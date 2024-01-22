@@ -17,7 +17,6 @@ type Props = {
 };
 
 export default function ChatMessageList({ messages = [], participants }: Props) {
-  console.log('participants chat-list', participants);
   const { messagesEndRef } = useMessagesScroll(messages);
 
   const slides = messages
