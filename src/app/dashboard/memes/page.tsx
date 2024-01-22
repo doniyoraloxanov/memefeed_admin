@@ -1,12 +1,14 @@
 import React from 'react';
+
 import MemesList from './components/MemesList';
 
 type Props = {};
 
-const MemesPage = (props: Props) => {
+const MemesPage = ({ searchParams }: { searchParams: Record<string, string> }) => {
+  console.log(searchParams);
   return (
     <main>
-      <MemesList />
+      <MemesList page={Number(searchParams.page) || 1} />
     </main>
   );
 };

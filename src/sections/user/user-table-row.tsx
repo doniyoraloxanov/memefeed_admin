@@ -46,7 +46,7 @@ export default function UserTableRow({ row, selected }: Props) {
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{role}</TableCell>
 
       <TableCell>
-        <Label variant="soft" color={'default'}>
+        <Label variant="soft" color="default">
           {status}
         </Label>
       </TableCell>
