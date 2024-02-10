@@ -69,6 +69,7 @@ export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
       field: 'actions',
       headerName: 'Actions',
       flex: 1,
+
       renderCell: (params) => (
         <IconButton
           color="primary"
@@ -87,8 +88,8 @@ export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
     <Container>
       <ConfirmDialog
         open={dialogOpen}
-        title="Delete Ad"
-        content="Do you really want to delete this advertisement?"
+        title="Delete Advertisement"
+        content="Are you sure you want to delete this item? This action cannot be undone. Please confirm your decision below."
         action={
           <Button
             variant="contained"
@@ -137,7 +138,7 @@ export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
           })) as any
         }
         columns={columns}
-        disableRowSelectionOnClick
+        disableRowSelectionOnClick={false}
         pagination
         initialState={{
           pagination: {

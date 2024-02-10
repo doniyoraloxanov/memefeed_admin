@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { prisma } from '../../app/lib/prisma';
 
 export const deleteAd = async (id: string) => {
@@ -8,6 +10,8 @@ export const deleteAd = async (id: string) => {
       id,
     },
   });
+
+  revalidatePath('/dashboard/ads/');
 
   return ad;
 };

@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { prisma } from '../../../app/lib/prisma';
 
 export const createAd = async (data: {
@@ -16,5 +18,8 @@ export const createAd = async (data: {
       imageUrl: data.imageUrl,
     },
   });
+
+  revalidatePath('/dashboard/ads/');
+
   return add;
 };

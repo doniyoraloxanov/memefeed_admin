@@ -12,6 +12,8 @@ import { RHFTextField } from 'src/components/hook-form';
 import RFHSelect from 'src/components/hook-form/rfh-select';
 import FormProvider from 'src/components/hook-form/form-provider';
 
+import { useSnackbar } from 'src/components/snackbar';
+
 import { createAd } from './actions';
 
 type AdsDrawerProps = {
@@ -29,12 +31,24 @@ type Inputs = {
 export default function AdsDrawer({ open, onClose }: AdsDrawerProps) {
   const theme = useTheme();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const methods = useForm<Inputs>();
 
-  const onSubmit = async () => {
+  const onSubmit = methods.handleSubmit(async () => {
     const data = methods.getValues();
     await createAd(data);
-  };
+
+    enqueueSnackbar('Advertisement added successfully', { variant: 'success' });
+
+    methods.reset({
+      title: '',
+      description: '',
+      url: '',
+      imageUrl: '',
+    });
+    onClose();
+  });
 
   return (
     <Drawer
@@ -76,7 +90,7 @@ export default function AdsDrawer({ open, onClose }: AdsDrawerProps) {
             <Typography variant="subtitle2">Image URL</Typography>
             <RFHSelect name="imageUrl" label="Select Image" required />
           </Stack>
-          <Button variant="contained" fullWidth type="submit" color="primary">
+          <Button variant="contained" fullWidth color="primary" onClick={onSubmit}>
             Save
           </Button>
         </Stack>
