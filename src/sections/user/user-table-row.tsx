@@ -1,11 +1,11 @@
+import { Prisma } from '@prisma/client';
+
 import Avatar from '@mui/material/Avatar';
-import ListItemText from '@mui/material/ListItemText';
-import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import ListItemText from '@mui/material/ListItemText';
 
 import Label from 'src/components/label';
-
-import { Prisma } from '@prisma/client';
 
 type Props = {
   selected: boolean;

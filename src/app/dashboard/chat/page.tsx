@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import { prisma } from 'src/app/lib/prisma';
 
 import ChatView from 'src/sections/chat/view/chat-view';

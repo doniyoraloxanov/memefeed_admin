@@ -19,6 +19,7 @@ export const paths = {
     root: ROOTS.DASHBOARD,
     list: `${ROOTS.DASHBOARD}/user/list`,
     chat: `${ROOTS.DASHBOARD}/chat`,
+    ads: `${ROOTS.DASHBOARD}/ads`,
     three: `${ROOTS.DASHBOARD}/three`,
     group: {
       root: `${ROOTS.DASHBOARD}/group`,

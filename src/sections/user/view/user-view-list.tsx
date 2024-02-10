@@ -1,17 +1,18 @@
 'use client';
 
+import { User } from '@prisma/client';
+import { useRouter, usePathname } from 'next/navigation';
+
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { paths } from 'src/routes/paths';
 
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
-import { useSettingsContext } from 'src/components/settings';
-
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { User } from '@prisma/client';
-import { usePathname, useRouter } from 'next/navigation';
 import { fDateTime } from 'src/utils/format-time';
+
+import { useSettingsContext } from 'src/components/settings';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 
 const columns: GridColDef[] = [
   {
