@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
 import Iconify from 'src/components/iconify';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 

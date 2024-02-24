@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import Masonry from '@mui/lab/Masonry';
 import Container from '@mui/material/Container';
 
