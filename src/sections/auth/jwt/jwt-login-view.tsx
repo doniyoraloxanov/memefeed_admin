@@ -1,16 +1,16 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import LoadingButton from '@mui/lab/LoadingButton';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
 import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import LoadingButton from '@mui/lab/LoadingButton';
+import InputAdornment from '@mui/material/InputAdornment';
 
 // import { useRouter, useSearchParams } from 'src/routes/hooks';
 
@@ -19,8 +19,8 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { useAuthContext } from 'src/auth/hooks';
 // import { PATH_AFTER_LOGIN } from 'src/config-global';
 
-import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import Iconify from 'src/components/iconify';
+import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 

@@ -13,18 +13,7 @@ type Props = {
 };
 
 export default function UserTableRow({ row, selected }: Props) {
-  const {
-    firstName,
-    lastName,
-    username,
-    status,
-    role,
-    languageCode,
-    level,
-    isVerified,
-    id,
-    createdAt,
-  } = row;
+  const { firstName, lastName, username, status, role, languageCode, level } = row;
 
   return (
     <TableRow hover selected={selected}>

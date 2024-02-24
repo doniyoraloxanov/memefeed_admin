@@ -11,9 +11,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { useRouter, useSearchParams } from 'src/routes/hooks';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
-
-import { useGetContacts, useGetConversation, useGetConversations } from 'src/app/api/chat';
+import { useGetConversation, useGetConversations } from 'src/app/api/chat';
 
 import { useSettingsContext } from 'src/components/settings';
 
@@ -31,8 +29,6 @@ import ChatHeaderCompose from '../chat-header-compose';
 export default function ChatView({ users }: { users: User[] }) {
   const router = useRouter();
 
-  const { user } = useMockedUser();
-
   const settings = useSettingsContext();
 
   const searchParams = useSearchParams();
@@ -40,8 +36,6 @@ export default function ChatView({ users }: { users: User[] }) {
   const selectedConversationId = searchParams.get('id') || '';
 
   const [recipients, setRecipients] = useState<IChatParticipant[]>([]);
-
-  const { contacts } = useGetContacts();
 
   const { conversations, conversationsLoading } = useGetConversations();
 
