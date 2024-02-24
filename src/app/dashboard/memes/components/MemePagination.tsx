@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Pagination from '@mui/material/Pagination';
 import { useSearchParams } from 'next/navigation';
+
+import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 
 function MemePagination({ total }: { total: number }) {

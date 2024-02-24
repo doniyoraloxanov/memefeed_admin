@@ -8,11 +8,11 @@ import Drawer, { drawerClasses } from '@mui/material/Drawer';
 
 import { paper } from 'src/theme/css';
 
+import { useSnackbar } from 'src/components/snackbar';
 import { RHFTextField } from 'src/components/hook-form';
 import RFHSelect from 'src/components/hook-form/rfh-select';
+import RHFSwitch from 'src/components/hook-form/rhf-switch';
 import FormProvider from 'src/components/hook-form/form-provider';
-
-import { useSnackbar } from 'src/components/snackbar';
 
 import { createAd } from './actions';
 
@@ -26,6 +26,7 @@ type Inputs = {
   description: string;
   url: string;
   imageUrl: string;
+  status: boolean;
 };
 
 export default function AdsDrawer({ open, onClose }: AdsDrawerProps) {
@@ -46,6 +47,7 @@ export default function AdsDrawer({ open, onClose }: AdsDrawerProps) {
       description: '',
       url: '',
       imageUrl: '',
+      status: true,
     });
     onClose();
   });
@@ -89,6 +91,9 @@ export default function AdsDrawer({ open, onClose }: AdsDrawerProps) {
           <Stack spacing={1.5}>
             <Typography variant="subtitle2">Image URL</Typography>
             <RFHSelect name="imageUrl" label="Select Image" required />
+          </Stack>
+          <Stack spacing={1.5}>
+            <RHFSwitch name="status" defaultChecked label="Select Status" required />
           </Stack>
           <Button variant="contained" fullWidth color="primary" onClick={onSubmit}>
             Save

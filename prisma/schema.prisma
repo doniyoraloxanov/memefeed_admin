@@ -108,6 +108,7 @@ model Ad {
   description String
   url         String
   imageUrl    String
+  status      Boolean @default(true)
   variant     String   @default("default")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

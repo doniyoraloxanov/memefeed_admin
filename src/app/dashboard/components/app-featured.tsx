@@ -1,14 +1,14 @@
 import { m } from 'framer-motion';
 
-import Card, { CardProps } from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Card, { CardProps } from '@mui/material/Card';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { MotionContainer, varFade } from 'src/components/animate';
-import Carousel, { CarouselArrows, CarouselDots, useCarousel } from 'src/components/carousel';
 import Image from 'src/components/image';
+import { varFade, MotionContainer } from 'src/components/animate';
+import Carousel, { useCarousel, CarouselDots, CarouselArrows } from 'src/components/carousel';
 
 // ----------------------------------------------------------------------
 

@@ -5,7 +5,7 @@ import { Ad } from '@prisma/client';
 import { Icon } from '@iconify/react';
 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Container, IconButton } from '@mui/material';
+import { Box, Button, Switch, Container, IconButton } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 
@@ -14,10 +14,11 @@ import AdsDrawer from 'src/components/ads/drawer/ads-drawer';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-import { deleteAd } from '../actions';
+import { deleteAd, updateAdStatus } from '../actions';
 
 export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
   const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [adId, setAdId] = useState('');
 
@@ -64,6 +65,21 @@ export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
       field: 'url',
       headerName: 'Url',
       flex: 2,
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      flex: 1,
+      renderCell: (params) => (
+        <Switch
+          checked={params.value === true}
+          onChange={() => {
+            setStatus((prev) => !prev);
+            updateAdStatus(params.row.id, status);
+            enqueueSnackbar('Ad status changed successfully', { variant: 'success' });
+          }}
+        />
+      ),
     },
     {
       field: 'actions',
@@ -128,11 +144,12 @@ export default function AdsView({ ads, total }: { ads: Ad[]; total: number }) {
       <DataGrid
         rowCount={total}
         rows={
-          ads.map((ad) => ({
-            id: ad.id,
+          ads.map((ad, index) => ({
+            id: index + 1,
             icon: ad.imageUrl,
             title: ad.title,
             description: ad.description,
+            status: ad.status,
             url: ad.url,
             actions: ad.id,
           })) as any

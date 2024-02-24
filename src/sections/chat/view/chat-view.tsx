@@ -1,5 +1,6 @@
 'use client';
 
+import { User } from '@prisma/client';
 import { useState, useEffect, useCallback } from 'react';
 
 import Card from '@mui/material/Card';
@@ -17,7 +18,6 @@ import { useGetContacts, useGetConversation, useGetConversations } from 'src/app
 import { useSettingsContext } from 'src/components/settings';
 
 import { IChatParticipant } from 'src/types/chat';
-import { User } from '@prisma/client';
 
 import ChatNav from '../chat-nav';
 import ChatRoom from '../chat-room';
