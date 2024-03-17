@@ -1,8 +1,5 @@
-import UserListView from 'src/sections/user/view/user-view-list';
-
-import { prisma } from '../../lib/prisma';
-
-// ----------------------------------------------------------------------
+import { prisma } from 'src/app/lib/prisma';
+import UserListView from 'src/app/dashboard/user/components/user-view-list';
 
 export const metadata = {
   title: 'MemeProf | User overview',
