@@ -1,6 +1,6 @@
 import UserListView from 'src/sections/user/view/user-view-list';
 
-import { prisma } from '../../../lib/prisma';
+import { prisma } from '../../lib/prisma';
 
 // ----------------------------------------------------------------------
 
