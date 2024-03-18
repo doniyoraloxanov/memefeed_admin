@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from '@iconify/react';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import Box, { BoxProps } from '@mui/material/Box';
 

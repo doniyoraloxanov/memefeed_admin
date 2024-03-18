@@ -1,13 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useReducer } from 'react';
+import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
 import axios, { endpoints } from 'src/utils/axios';
 
-import { AuthContext } from './auth-context';
 import { setSession } from './utils';
+import { AuthContext } from './auth-context';
 // import { isValidToken } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
+import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
 
 // ----------------------------------------------------------------------
 /**

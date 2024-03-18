@@ -1,13 +1,15 @@
+import React from 'react';
+import { User } from '@prisma/client';
+
 import Box from '@mui/material/Box';
 
-import Lightbox, { useLightBox } from 'src/components/lightbox';
 import Scrollbar from 'src/components/scrollbar';
+import Lightbox, { useLightBox } from 'src/components/lightbox';
 
 import { IChatMessage } from 'src/types/chat';
 
-import { User } from '@prisma/client';
-import ChatMessageItem from './chat-message-item';
 import { useMessagesScroll } from './hooks';
+import ChatMessageItem from './chat-message-item';
 
 // ----------------------------------------------------------------------
 

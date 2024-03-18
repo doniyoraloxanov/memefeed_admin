@@ -1,21 +1,19 @@
-import { TextField, TextFieldProps, InputAdornment } from "@mui/material";
-import {
-  FieldValues,
-  UseControllerProps,
-  useController,
-} from "react-hook-form";
+import React from 'react';
+import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
+
+import { TextField, TextFieldProps, InputAdornment } from '@mui/material';
 
 type Props<T extends FieldValues = FieldValues> = UseControllerProps<T> & {
-  name: UseControllerProps<T>["name"];
-  control: UseControllerProps<T>["control"];
-  label?: TextFieldProps["label"];
+  name: UseControllerProps<T>['name'];
+  control: UseControllerProps<T>['control'];
+  label?: TextFieldProps['label'];
   required?: boolean;
   fullWidth?: boolean;
-  rules?: UseControllerProps<T>["rules"];
-  variant?: TextFieldProps["variant"];
-  sx?: TextFieldProps["sx"];
+  rules?: UseControllerProps<T>['rules'];
+  variant?: TextFieldProps['variant'];
+  sx?: TextFieldProps['sx'];
   endAdornment?: React.ReactNode;
-  type?: TextFieldProps["type"];
+  type?: TextFieldProps['type'];
 };
 
 const ControlledTextField = <T extends FieldValues = FieldValues>({
