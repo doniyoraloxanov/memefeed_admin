@@ -28,9 +28,8 @@ export default function VerificationListView({
   const pathname = usePathname();
 
   const handleEditRow = async (id: string) => {
-    console.log('USER ID', typeof id);
     toggleOpen();
-    setUserId(id.toString());
+    setUserId(id);
   };
 
   const columns: GridColDef[] = [
@@ -78,7 +77,7 @@ export default function VerificationListView({
           showInMenu
           icon={<Iconify icon="solar:pen-bold" />}
           label="Edit"
-          onClick={() => handleEditRow(params.row.userId)}
+          onClick={() => handleEditRow(params.row.id)}
         />,
       ],
     },

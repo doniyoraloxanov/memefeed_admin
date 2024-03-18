@@ -22,7 +22,6 @@ export default function UserListView({ users, total }: { users: User[]; total: n
 
       <Card>
         <DataGrid
-          checkboxSelection
           rowCount={total}
           rows={users}
           columns={columns}

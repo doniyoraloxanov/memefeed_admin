@@ -1,29 +1,30 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Stack, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+import { UseVertification } from 'src/utils/getVertification';
+
 import { updateVerification } from 'src/app/actions/verification';
-import {
-  VerificationSchema,
-  verificationFormValues,
-  VerificationFormDefaultValues,
-} from 'src/app/constants';
+import { VerificationSchema, verificationFormValues } from 'src/app/constants';
 
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 type Props = {
   toggleOpen: () => void;
-  userId: string;
+  userId?: string;
 };
 
 export default function VerificationNewEditForm({ toggleOpen, userId }: Props) {
   const { enqueueSnackbar } = useSnackbar();
+  const { vertification } = UseVertification(userId);
 
   const methods = useForm<verificationFormValues>({
-    defaultValues: VerificationFormDefaultValues,
+    defaultValues: vertification as verificationFormValues,
     resolver: zodResolver(VerificationSchema),
   });
 
