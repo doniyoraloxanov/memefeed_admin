@@ -31,5 +31,8 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/ads`,
       new: `${ROOTS.DASHBOARD}/ads/new`,
     },
+    verification: {
+      root: `${ROOTS.DASHBOARD}/verification`,
+    },
   },
 };

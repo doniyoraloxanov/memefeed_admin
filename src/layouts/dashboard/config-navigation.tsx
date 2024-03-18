@@ -63,7 +63,7 @@ export function useNavData() {
             children: [{ title: 'List', path: paths.dashboard.meme.root }],
           },
           {
-            title: 'ads',
+            title: 'Ads',
             icon: ICONS.booking,
             path: paths.dashboard.ads.root,
             children: [
@@ -72,10 +72,17 @@ export function useNavData() {
             ],
           },
           {
-            title: 'chat',
-            icon: ICONS.chat,
-            path: paths.dashboard.chat.chat,
+            title: 'Verification',
+            icon: ICONS.booking,
+            path: paths.dashboard.verification.root,
+            children: [{ title: 'List', path: paths.dashboard.verification.root }],
           },
+
+          // {
+          //   title: 'chat',
+          //   icon: ICONS.chat,
+          //   path: paths.dashboard.chat.chat,
+          // },
         ],
       },
     ],
