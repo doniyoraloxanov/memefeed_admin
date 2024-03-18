@@ -20,9 +20,6 @@ export const paths = {
     user: {
       root: `${ROOTS.DASHBOARD}/user`,
     },
-    chat: {
-      chat: `${ROOTS.DASHBOARD}/chat`,
-    },
 
     meme: {
       root: `${ROOTS.DASHBOARD}/memes`,

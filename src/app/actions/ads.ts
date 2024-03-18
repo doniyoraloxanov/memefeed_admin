@@ -1,10 +1,19 @@
 'use server';
 
-import { prisma } from 'src/app/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
-export async function deleteAds(id: string) {}
+import { prisma } from 'src/app/lib/prisma';
 
+export async function deleteAds(id: string) {
+  await await prisma.ads.delete({
+    where: {
+      id,
+    },
+  });
+  revalidatePath('/dashboard/ads');
+}
+
+// eslint-disable-next-line consistent-return
 export async function createAds(title: string, description: string, imageUrl: string, url: string) {
   try {
     const ads = await prisma.ads.create({

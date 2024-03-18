@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -104,27 +103,17 @@ model Comment {
   updatedAt DateTime @updatedAt
 }
 
-<<<<<<< HEAD
 model Ads {
-=======
-model Ad {
->>>>>>> 6af2646fbb213fe89972d621bf688698ea541a09
-  id String @id @default(uuid())
-
+  id          String   @id @default(uuid())
   title       String
   description String
   url         String
   imageUrl    String
-<<<<<<< HEAD
-=======
-  status      Boolean @default(true)
->>>>>>> 6af2646fbb213fe89972d621bf688698ea541a09
   variant     String   @default("default")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-<<<<<<< HEAD
 model Verification {
   id String @id @default(uuid())
 
@@ -145,8 +134,6 @@ model Verification {
   updatedAt DateTime @updatedAt
 }
 
-=======
->>>>>>> 6af2646fbb213fe89972d621bf688698ea541a09
 enum ReferalStatus {
   IDLE
   ACTIVE

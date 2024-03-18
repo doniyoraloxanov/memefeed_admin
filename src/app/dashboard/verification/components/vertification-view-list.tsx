@@ -1,11 +1,14 @@
 'use client';
 
-import { Card, Container } from '@mui/material';
-import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { Verification } from '@prisma/client';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+
+import { Card, Container } from '@mui/material';
+import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
+
 import VertificationCrumb from 'src/app/dashboard/verification/components/vertification-crumb';
 import { RenderCellCreatedAt } from 'src/app/dashboard/verification/components/vertification-table-row';
+
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 
@@ -82,31 +85,29 @@ export default function VerificationListView({
   ];
 
   return (
-    <>
-      <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-        <VertificationCrumb />
-        <Card>
-          <DataGrid
-            rowCount={total}
-            rows={verifications}
-            columns={columns}
-            disableRowSelectionOnClick
-            onPaginationModelChange={(model) => {
-              router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
-            }}
-            pagination
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
-                  page: 0,
-                },
+    <Container maxWidth={settings.themeStretch ? false : 'lg'}>
+      <VertificationCrumb />
+      <Card>
+        <DataGrid
+          rowCount={total}
+          rows={verifications}
+          columns={columns}
+          disableRowSelectionOnClick
+          onPaginationModelChange={(model) => {
+            router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
+          }}
+          pagination
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+                page: 0,
               },
-            }}
-            paginationMode="server"
-          />
-        </Card>
-      </Container>
-    </>
+            },
+          }}
+          paginationMode="server"
+        />
+      </Card>
+    </Container>
   );
 }

@@ -1,7 +1,5 @@
 import { BackgroundType } from '../types';
 
-// ----------------------------------------------------------------------
-
 export const varBgColor = (props?: BackgroundType) => {
   const colors = props?.colors || ['#19dcea', '#b22cff'];
   const duration = props?.duration || 5;

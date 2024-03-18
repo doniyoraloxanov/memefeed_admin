@@ -1,5 +1,5 @@
-import VerificationCreateView from 'src/app/dashboard/verification/components/vertification-create-view';
 import { prisma } from 'src/app/lib/prisma';
+import VerificationCreateView from 'src/app/dashboard/verification/components/vertification-create-view';
 
 export const metadata = {
   title: 'MemeProf | Verifications overview',

@@ -1,7 +1,8 @@
 'use server';
 
-import { prisma } from 'src/app/lib/prisma';
 import { revalidatePath } from 'next/cache';
+
+import { prisma } from 'src/app/lib/prisma';
 
 export async function updateVerification(
   title: string,

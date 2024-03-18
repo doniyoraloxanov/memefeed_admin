@@ -1,19 +1,21 @@
 'use client';
 
-import { Card, Container } from '@mui/material';
-import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { Ads } from '@prisma/client';
-import { usePathname, useRouter } from 'next/navigation';
 import { useSnackbar } from 'notistack';
-import AdsCrumb from 'src/app/dashboard/ads/components/ads-crumb';
+import { useRouter, usePathname } from 'next/navigation';
+
+import { Card, Container } from '@mui/material';
+import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
+
 import { deleteAds } from 'src/app/actions/ads';
+import AdsCrumb from 'src/app/dashboard/ads/components/ads-crumb';
+import {
+  RenderCellProduct,
+  RenderCellCreatedAt,
+} from 'src/app/dashboard/ads/components/ads-table-row';
+
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
-import { fDateTime } from 'src/utils/format-time';
-import {
-  RenderCellCreatedAt,
-  RenderCellProduct,
-} from 'src/app/dashboard/ads/components/ads-table-row';
 
 export default function AdsListView({ ads, total }: { ads: Ads[]; total: number }) {
   const settings = useSettingsContext();
@@ -81,32 +83,30 @@ export default function AdsListView({ ads, total }: { ads: Ads[]; total: number 
   ];
 
   return (
-    <>
-      <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-        <AdsCrumb />
+    <Container maxWidth={settings.themeStretch ? false : 'lg'}>
+      <AdsCrumb />
 
-        <Card>
-          <DataGrid
-            rowCount={total}
-            rows={ads}
-            columns={columns}
-            disableRowSelectionOnClick
-            onPaginationModelChange={(model) => {
-              router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
-            }}
-            pagination
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
-                  page: 0,
-                },
+      <Card>
+        <DataGrid
+          rowCount={total}
+          rows={ads}
+          columns={columns}
+          disableRowSelectionOnClick
+          onPaginationModelChange={(model) => {
+            router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
+          }}
+          pagination
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+                page: 0,
               },
-            }}
-            paginationMode="server"
-          />
-        </Card>
-      </Container>
-    </>
+            },
+          }}
+          paginationMode="server"
+        />
+      </Card>
+    </Container>
   );
 }

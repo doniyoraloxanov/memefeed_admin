@@ -1,21 +1,25 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { createAds } from 'src/app/actions/ads';
-import FormProvider, { RHFTextField, RHFUpload } from 'src/components/hook-form';
-import { useSnackbar } from 'src/components/snackbar';
-import { useResponsive } from 'src/hooks/use-responsive';
-import { useRouter } from 'src/routes/hooks';
-import { paths } from 'src/routes/paths';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
-import { adsSchema, AdsFormValues, adsFormDefaultValues } from 'src/app/constants';
+import CardHeader from '@mui/material/CardHeader';
+import Typography from '@mui/material/Typography';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
+
+import { useResponsive } from 'src/hooks/use-responsive';
+
+import { createAds } from 'src/app/actions/ads';
 import { uploadImage } from 'src/app/lib/imageUpload';
+import { adsSchema, AdsFormValues, adsFormDefaultValues } from 'src/app/constants';
+
+import { useSnackbar } from 'src/components/snackbar';
+import FormProvider, { RHFUpload, RHFTextField } from 'src/components/hook-form';
 
 export default function AdsNewEditForm() {
   const router = useRouter();
@@ -30,12 +34,9 @@ export default function AdsNewEditForm() {
   const {
     reset,
     setValue,
-    watch,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const values = watch();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -71,9 +72,7 @@ export default function AdsNewEditForm() {
     [setValue]
   );
 
-  const handleRemoveFile = useCallback(() => {
-    return setValue('imageUrl', '');
-  }, [setValue]);
+  const handleRemoveFile = useCallback(() => setValue('imageUrl', ''), [setValue]);
 
   const renderDetails = (
     <>
