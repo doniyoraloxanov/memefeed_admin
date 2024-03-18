@@ -1,6 +1,6 @@
 const admins = {
-  password: 'admin',
-  email: 'contact@memeprof.com',
+  password: process.env.PASSWORD,
+  email: process.env.EMAIL,
 };
 
 export async function POST(req: Request) {

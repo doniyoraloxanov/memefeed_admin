@@ -63,6 +63,15 @@ export function useNavData() {
             children: [{ title: 'List', path: paths.dashboard.meme.root }],
           },
           {
+            title: 'ads',
+            icon: ICONS.booking,
+            path: paths.dashboard.ads.root,
+            children: [
+              { title: 'List', path: paths.dashboard.ads.root },
+              { title: 'create', path: paths.dashboard.ads.new },
+            ],
+          },
+          {
             title: 'chat',
             icon: ICONS.chat,
             path: paths.dashboard.chat.chat,

@@ -27,5 +27,9 @@ export const paths = {
     meme: {
       root: `${ROOTS.DASHBOARD}/memes`,
     },
+    ads: {
+      root: `${ROOTS.DASHBOARD}/ads`,
+      new: `${ROOTS.DASHBOARD}/ads/new`,
+    },
   },
 };
