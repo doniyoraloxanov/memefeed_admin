@@ -7,7 +7,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { Card, Container } from '@mui/material';
 import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
 
-import { deleteAds } from 'src/app/actions/ads';
+import { deleteAdsAction } from 'src/app/actions/ads';
 import AdsCrumb from 'src/app/dashboard/ads/components/ads-crumb';
 import {
   RenderCellProduct,
@@ -26,7 +26,7 @@ export default function AdsListView({ ads, total }: { ads: Ads[]; total: number 
 
   const handleDeleteRow = async (id: string) => {
     enqueueSnackbar('Delete success!');
-    await deleteAds(id);
+    await deleteAdsAction(id);
   };
 
   const columns: GridColDef[] = [

@@ -18,6 +18,7 @@ export const adsFormDefaultValues: AdsFormValues = {
 
 // Verification schema
 export const VerificationSchema = z.object({
+  id: z.string(),
   title: z.string().min(1, 'title is required'),
   shortDescription: z.string(),
   description: z.string(),
@@ -30,6 +31,7 @@ export const VerificationSchema = z.object({
 export type verificationFormValues = z.infer<typeof VerificationSchema>;
 
 export const VerificationFormDefaultValues: verificationFormValues = {
+  id: '',
   title: '',
   shortDescription: '',
   description: '',

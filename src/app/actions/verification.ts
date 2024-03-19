@@ -4,27 +4,47 @@ import { revalidatePath } from 'next/cache';
 
 import { prisma } from 'src/app/lib/prisma';
 
-export async function updateVerification(
-  title: string,
-  shortDescription: string,
-  description: string,
-  rewardAmount: number,
-  icon: string,
-  payload: string,
-  url: string
-) {
-  const updatederification = await prisma.verification.updateMany({
+export type VerificationData = {
+  id: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  rewardAmount: number;
+  icon: string;
+  payload: string;
+  url: string;
+};
+
+export async function updateVerificationAction(data: VerificationData) {
+  const updatederification = await prisma.verification.update({
+    where: {
+      id: data.id,
+    },
     data: {
-      title,
-      shortDescription,
-      description,
-      rewardAmount,
-      icon,
-      payload,
-      url,
+      title: data.title,
+      shortDescription: data.shortDescription,
+      rewardAmount: data.rewardAmount,
+      icon: data.icon,
+      url: data.url,
+      payload: data.payload,
     },
   });
 
   revalidatePath('/dashboard/verification');
   return updatederification;
+}
+
+export async function updateIsCompletedAction(isCompleted: boolean, id: string) {
+  const updatedisCompleted = await prisma.verification.update({
+    where: {
+      id,
+    },
+
+    data: {
+      isCompleted,
+    },
+  });
+
+  revalidatePath('/dashboard/verification');
+  return updatedisCompleted;
 }

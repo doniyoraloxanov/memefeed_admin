@@ -14,7 +14,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { createAds } from 'src/app/actions/ads';
+import { createAdsAction } from 'src/app/actions/ads';
 import { uploadImage } from 'src/app/lib/imageUpload';
 import { adsSchema, AdsFormValues, adsFormDefaultValues } from 'src/app/constants';
 
@@ -46,7 +46,7 @@ export default function AdsNewEditForm() {
         const bytes = await blob.arrayBuffer();
         const buffer = Buffer.from(bytes);
         const image = await uploadImage(data.title, buffer);
-        await createAds(data.title, data.description, image.data?.path!, data.url);
+        await createAdsAction(data, image.data?.path!);
       }
 
       reset();

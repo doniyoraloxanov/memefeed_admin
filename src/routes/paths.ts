@@ -30,6 +30,7 @@ export const paths = {
     },
     verification: {
       root: `${ROOTS.DASHBOARD}/verification`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/verification/${id}/edit`,
     },
   },
 };

@@ -1,5 +1,5 @@
 import { prisma } from 'src/app/lib/prisma';
-import VerificationCreateView from 'src/app/dashboard/verification/components/vertification-create-view';
+import VerificationsListView from 'src/app/dashboard/verification/components/verification-view-list';
 
 export const metadata = {
   title: 'MemeProf | Verifications overview',
@@ -18,5 +18,5 @@ export default async function VerificationPage({
     skip: searchParams.page ? Number(searchParams.page) * Number(searchParams.pageSize) : 0,
   });
 
-  return <VerificationCreateView verifications={verifications} total={total} />;
+  return <VerificationsListView verifications={verifications} total={total} />;
 }

@@ -1,36 +1,55 @@
 'use client';
 
+import { useCallback } from 'react';
 import { Verification } from '@prisma/client';
 import { useRouter, usePathname } from 'next/navigation';
 
-import { Card, Container } from '@mui/material';
+import { Card, Switch, Container, FormControlLabel } from '@mui/material';
 import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
 
-import VertificationCrumb from 'src/app/dashboard/verification/components/vertification-crumb';
-import { RenderCellCreatedAt } from 'src/app/dashboard/verification/components/vertification-table-row';
+import { paths } from 'src/routes/paths';
+
+import { updateIsCompletedAction } from 'src/app/actions/verification';
 
 import Iconify from 'src/components/iconify';
+import { useSnackbar } from 'src/components/snackbar';
 import { useSettingsContext } from 'src/components/settings';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 
-export default function VerificationListView({
+import { RenderCellCreatedAt } from '../../ads/components/ads-table-row';
+
+export default function VerificationsListView({
   verifications,
   total,
-  toggleOpen,
-  setUserId,
 }: {
   verifications: Verification[];
   total: number;
-  toggleOpen: () => void;
-  setUserId: (userId: string) => void;
 }) {
   const settings = useSettingsContext();
   const router = useRouter();
   const pathname = usePathname();
+  const { enqueueSnackbar } = useSnackbar();
 
-  const handleEditRow = async (id: string) => {
-    toggleOpen();
-    setUserId(id);
+  const handleSwitchToggle = async (id: string) => {
+    const verificationToUpdate = verifications.find((verification) => verification.id === id);
+    if (!verificationToUpdate) return;
+
+    const newIsCompletedValue = !verificationToUpdate.isCompleted;
+
+    try {
+      await updateIsCompletedAction(newIsCompletedValue, id);
+      enqueueSnackbar('Update success!');
+    } catch (error) {
+      console.error('Error updating isCompleted status:', error);
+    }
   };
+
+  const handleEditRow = useCallback(
+    (id: string) => {
+      router.push(paths.dashboard.verification.edit(id));
+    },
+    [router]
+  );
 
   const columns: GridColDef[] = [
     {
@@ -50,11 +69,27 @@ export default function VerificationListView({
     },
     {
       field: 'rewardAmount',
-      headerName: 'Permission key',
+      headerName: 'RewardAmount',
       flex: 1,
     },
     { field: 'payload', headerName: 'payload', flex: 1 },
     { field: 'url', headerName: 'Url', flex: 1 },
+    {
+      field: 'isCompleted',
+      headerName: 'Status',
+      flex: 1,
+      renderCell: (params) => (
+        <FormControlLabel
+          control={
+            <Switch
+              checked={params.row.isCompleted}
+              onChange={() => handleSwitchToggle(params.row.id)}
+            />
+          }
+          label=""
+        />
+      ),
+    },
 
     {
       field: 'createdAt',
@@ -85,7 +120,18 @@ export default function VerificationListView({
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-      <VertificationCrumb />
+      <CustomBreadcrumbs
+        heading="List"
+        links={[
+          { name: 'Dashboard', href: paths.dashboard.root },
+          { name: 'verification', href: paths.dashboard.verification.root },
+          { name: 'List' },
+        ]}
+        sx={{
+          mb: { xs: 3, md: 5 },
+        }}
+      />
+
       <Card>
         <DataGrid
           rowCount={total}
@@ -93,6 +139,7 @@ export default function VerificationListView({
           columns={columns}
           disableRowSelectionOnClick
           onPaginationModelChange={(model) => {
+            console.log(model);
             router.push(`${pathname}?page=${model.page}&pageSize=${model.pageSize}`);
           }}
           pagination
