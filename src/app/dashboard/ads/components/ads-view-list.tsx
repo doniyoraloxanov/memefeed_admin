@@ -1,6 +1,6 @@
 'use client';
 
-import { Ads } from '@prisma/client';
+import { Ad } from '@prisma/client';
 import { useSnackbar } from 'notistack';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -17,7 +17,7 @@ import {
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 
-export default function AdsListView({ ads, total }: { ads: Ads[]; total: number }) {
+export default function AdsListView({ ads, total }: { ads: Ad[]; total: number }) {
   const settings = useSettingsContext();
   const router = useRouter();
   const pathname = usePathname();
