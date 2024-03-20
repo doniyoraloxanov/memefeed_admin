@@ -3,17 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { prisma } from 'src/app/lib/prisma';
-
-export type VerificationData = {
-  id: string;
-  title: string;
-  shortDescription: string;
-  description: string;
-  rewardAmount: number;
-  icon: string;
-  payload: string;
-  url: string;
-};
+import { VerificationData } from 'src/app/constants';
 
 export async function updateVerificationAction(data: VerificationData) {
   const updatederification = await prisma.verification.update({

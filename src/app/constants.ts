@@ -40,3 +40,21 @@ export const VerificationFormDefaultValues: verificationFormValues = {
   payload: '',
   url: '',
 };
+
+export type AdsData = {
+  title: string;
+  description: string;
+  imageUrl: string;
+  url: string;
+};
+
+export type VerificationData = {
+  id: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  rewardAmount: number;
+  icon: string;
+  payload: string;
+  url: string;
+};

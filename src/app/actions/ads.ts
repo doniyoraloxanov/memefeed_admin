@@ -3,13 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { prisma } from 'src/app/lib/prisma';
-
-export type AdsData = {
-  title: string;
-  description: string;
-  imageUrl: string;
-  url: string;
-};
+import { AdsData } from 'src/app/constants';
 
 export async function createAdsAction(data: AdsData, imageUrl: string) {
   const ads = await prisma.ads.create({
@@ -27,7 +21,7 @@ export async function createAdsAction(data: AdsData, imageUrl: string) {
 }
 
 export async function deleteAdsAction(id: string) {
-  await await prisma.ads.delete({
+  await prisma.ads.delete({
     where: {
       id,
     },
