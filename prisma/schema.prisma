@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -103,8 +104,9 @@ model Comment {
   updatedAt DateTime @updatedAt
 }
 
-model Ads {
-  id          String   @id @default(uuid())
+model Ad {
+  id String @id @default(uuid())
+
   title       String
   description String
   url         String
@@ -123,9 +125,10 @@ model Verification {
 
   isCompleted  Boolean @default(false)
   rewardAmount Float?
-  icon         String?
-  payload      String?
-  url          String?
+
+  icon    String?
+  payload String?
+  url     String?
 
   userId BigInt?
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
