@@ -8,8 +8,8 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function Page({ searchParams }: { searchParams: Record<string, string> }) {
-  const total = await prisma.ads.count();
-  const ads = await prisma.ads.findMany({
+  const total = await prisma.ad.count();
+  const ads = await prisma.ad.findMany({
     take: searchParams.pageSize ? Number(searchParams.pageSize) : 10,
     skip: searchParams.page ? Number(searchParams.page) * Number(searchParams.pageSize) : 0,
   });
