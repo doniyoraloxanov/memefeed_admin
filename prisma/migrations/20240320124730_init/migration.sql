@@ -2,12 +2,35 @@
 CREATE TYPE "ReferalStatus" AS ENUM ('IDLE', 'ACTIVE');
 
 -- CreateEnum
+CREATE TYPE "IsVerified" AS ENUM ('IDEAL', 'PASSED', 'FAILED');
+
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
+
+-- CreateEnum
+CREATE TYPE "userStatus" AS ENUM ('ACTIVE', 'BANNED', 'DELETED');
+
+-- CreateEnum
 CREATE TYPE "Level" AS ENUM ('NOOB', 'GRIFTER', 'PLOTTER', 'WHEELMAN', 'HACKER', 'CRYPTOLOGIST', 'PHANTOM', 'INFILTRATOR', 'SAFECRACKER', 'MAESTRO', 'THE_PROFESSOR');
 
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "level" "Level" NOT NULL DEFAULT 'NOOB',
-ADD COLUMN     "referralStatus" "ReferalStatus" NOT NULL DEFAULT 'IDLE',
-ADD COLUMN     "referredById" BIGINT;
+-- CreateTable
+CREATE TABLE "User" (
+    "id" BIGSERIAL NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT,
+    "username" TEXT,
+    "languageCode" TEXT,
+    "status" "userStatus" NOT NULL DEFAULT 'ACTIVE',
+    "role" "Role" NOT NULL DEFAULT 'USER',
+    "isVerified" "IsVerified" NOT NULL DEFAULT 'IDEAL',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "referredById" BIGINT,
+    "referralStatus" "ReferalStatus" NOT NULL DEFAULT 'IDLE',
+    "level" "Level" NOT NULL DEFAULT 'NOOB',
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Point" (
@@ -109,6 +132,9 @@ CREATE TABLE "_MemeViews" (
     "A" TEXT NOT NULL,
     "B" BIGINT NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_Followers_AB_unique" ON "_Followers"("A", "B");
