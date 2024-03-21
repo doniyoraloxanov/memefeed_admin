@@ -3,6 +3,8 @@ import StatisticsPage from './components/Statistics';
 
 // ----------------------------------------------------------------------
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'MemeProf | Statistics overview',
 };
